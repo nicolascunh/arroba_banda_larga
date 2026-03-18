@@ -1,0 +1,384 @@
+/* ═══════════════════════════════════════════════
+   SITE (Landing page) styles
+═══════════════════════════════════════════════ */
+
+/* ─── Layout ─────────────────────────────────── */
+.site-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.site-section {
+  padding: 84px 24px;
+}
+
+/* ─── Typography helpers ─────────────────────── */
+.site-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--blue);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.site-kicker::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: var(--blue);
+  border-radius: 2px;
+}
+.site-kicker.amber         { color: var(--amber); }
+.site-kicker.amber::before { background: var(--amber); }
+.site-kicker.center        { justify-content: center; }
+
+.site-h2 {
+  font-family: var(--font-d);
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 800;
+  color: var(--l1);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.site-h2.center { text-align: center; }
+.site-h2.white  { color: #fff; }
+
+.site-sub {
+  font-size: 16px;
+  color: var(--l3);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+/* ─── Navbar ─────────────────────────────────── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  background: rgba(13, 17, 26, 0.88);
+  backdrop-filter: saturate(180%) blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.site-nav.light {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 0.5px solid rgba(60, 60, 67, 0.18);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.07);
+}
+.site-nav-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.site-nav-links a {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 7px 13px;
+  border-radius: var(--r-sm);
+  transition: background 0.15s, color 0.15s;
+  color: rgba(255, 255, 255, 0.72);
+}
+.site-nav-links a:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.site-nav.light .site-nav-links a { color: var(--l2); }
+.site-nav.light .site-nav-links a:hover { background: var(--blue-lt); color: var(--blue); }
+.site-nav-links a.active { color: #fff; font-weight: 700; }
+.site-nav.light .site-nav-links a.active { color: var(--blue); }
+
+/* ─── Plan cards ─────────────────────────────── */
+.plan-card {
+  border-radius: var(--r-lg);
+  padding: 30px 26px;
+  position: relative;
+  transition: transform 0.22s, box-shadow 0.22s;
+  background: var(--bg);
+  border: 1.5px solid transparent;
+}
+.plan-card:hover { transform: translateY(-6px); box-shadow: var(--sh-md); }
+.plan-card.featured {
+  background: var(--dark);
+  border-color: rgba(27, 79, 168, 0.5);
+  box-shadow: var(--blue-glow);
+}
+.plan-card.featured:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 24px 64px rgba(27, 79, 168, 0.45);
+}
+
+/* ─── Feature cards ──────────────────────────── */
+.feature-card {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  padding: 26px;
+  box-shadow: var(--sh-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--sh-md); }
+
+/* ─── CEP Widget ─────────────────────────────── */
+.cep-input {
+  flex: 1;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 500;
+  background: rgba(118, 118, 128, 0.1);
+  border: 1.5px solid transparent;
+  border-radius: var(--r-sm);
+  padding: 12px 15px;
+  outline: none;
+  color: var(--l1);
+  letter-spacing: 0.02em;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cep-input::placeholder { color: var(--l4); font-weight: 400; }
+.cep-input:focus {
+  border-color: rgba(27, 79, 168, 0.3);
+  box-shadow: 0 0 0 4px rgba(27, 79, 168, 0.09);
+}
+
+/* ─── FAQ accordion ──────────────────────────── */
+.faq-item { background: var(--bg); border-radius: var(--r-sm); overflow: hidden; }
+.faq-item.open .faq-question { color: var(--blue); }
+
+/* ─── Hero plan cards ────────────────────────── */
+.hero-plan-card {
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.hero-plan-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(27, 79, 168, 0.45) !important;
+}
+
+/* ─── Plan CTA buttons ───────────────────────── */
+.plan-cta {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  padding: 14px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid rgba(27, 79, 168, 0.22);
+  cursor: pointer;
+  background: transparent;
+  color: var(--blue);
+  box-shadow: none;
+  transition: transform 0.15s, background 0.15s;
+}
+.plan-cta:hover { transform: translateY(-1px); }
+
+.plan-cta-featured {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  padding: 14px;
+  border-radius: var(--r-sm);
+  border: none;
+  cursor: pointer;
+  background: var(--amber);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(245, 162, 0, 0.38);
+  transition: transform 0.15s, background 0.15s;
+}
+.plan-cta-featured:hover { transform: translateY(-1px); }
+
+/* ─── Speed test button ──────────────────────── */
+.speed-test-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: var(--blue);
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 16px 32px;
+  margin-top: 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.speed-test-btn:hover { transform: translateY(-2px); }
+
+/* ─── How It Works ───────────────────────────── */
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+.how-it-works-line {
+  position: absolute;
+  top: 30px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1.5px;
+  background: var(--sep);
+}
+.how-it-works-step {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+  box-shadow: var(--sh-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.how-it-works-step:hover {
+  transform: scale(1.08);
+  box-shadow: var(--sh-md);
+}
+
+/* ─── Testimonial cards ──────────────────────── */
+.testimonial-card {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  padding: 24px;
+  box-shadow: var(--sh-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-md);
+}
+
+/* ─── Promo CTA ──────────────────────────────── */
+.promo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--blue);
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 16px 32px;
+  margin-top: 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+.promo-cta:hover { transform: translateY(-2px); }
+
+/* ─── App Store buttons ──────────────────────── */
+.app-store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-sm);
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.15s, transform 0.15s;
+  text-decoration: none;
+}
+.app-store-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+/* ─── Contact channel ────────────────────────── */
+.contact-channel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  padding: 15px 18px;
+  box-shadow: var(--sh-sm);
+  transition: transform 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+.contact-channel:hover {
+  transform: translateX(4px);
+  box-shadow: var(--sh-md);
+}
+
+/* ─── Footer links ───────────────────────────── */
+.footer-social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background 0.15s, transform 0.15s;
+}
+.footer-social-link:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.footer-link {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.15s;
+}
+.footer-link:hover { color: #fff; }
+
+.footer-bottom-link {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.38);
+  transition: color 0.15s;
+}
+.footer-bottom-link:hover { color: rgba(255, 255, 255, 0.8); }
+
+/* ─── WhatsApp FAB ───────────────────────────── */
+.wa-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 300;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.wa-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
+}
+
+/* ─── Responsive site ────────────────────────── */
+@media (max-width: 960px) {
+  .site-nav-links { display: none; }
+}
+@media (max-width: 640px) {
+  :root { --nav-h: 60px; }
+  .site-section { padding: 60px 16px; }
+}

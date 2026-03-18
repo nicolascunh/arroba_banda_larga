@@ -1,0 +1,301 @@
+/* ═══════════════════════════════════════════════
+   ARROBA BANDA LARGA — Global Design Tokens
+   Edite as variáveis abaixo para customizar todo
+   o visual do projeto de uma só vez.
+═══════════════════════════════════════════════ */
+
+:root {
+  /* ── Brand ────────────────────────────── */
+  --blue:       #1B4FA8;
+  --blue-dk:    #123680;
+  --blue-dkr:   #0F3280;
+  --blue-lt:    rgba(27, 79, 168, 0.09);
+  --blue-lt2:   rgba(27, 79, 168, 0.16);
+  --blue-glow:  0 8px 28px rgba(27, 79, 168, 0.4);
+  --amber:      #F5A200;
+  --amber-dk:   #D98F00;
+
+  /* ── Dark palette (hero, footer, login bg) */
+  --dark:       #0D111A;
+  --dark2:      #121824;
+  --dark3:      #181F2D;
+  --dark4:      #1E2638;
+  --dark5:      #242D40;
+
+  /* ── Light palette (site body) ───────── */
+  --bg:         #F2F2F7;
+  --surface:    #FFFFFF;
+  --l1:         #1C1C1E;
+  --l2:         #3C3C43;
+  --l3:         #6C6C70;
+  --l4:         #AEAEB2;
+  --sep:        rgba(60, 60, 67, 0.13);
+  --sep2:       rgba(60, 60, 67, 0.22);
+
+  /* ── Semantic ─────────────────────────── */
+  --green:      #34C759;
+  --red:        #FF3B30;
+  --orange:     #FF9500;
+  --purple:     #5856D6;
+
+  /* ── Shadows ─────────────────────────── */
+  --sh-sm:      0 1px 4px rgba(0,0,0,.07), 0 0 1px rgba(0,0,0,.04);
+  --sh-md:      0 6px 24px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.05);
+  --sh-lg:      0 16px 56px rgba(0,0,0,.13), 0 2px 8px rgba(0,0,0,.06);
+  --sh-dark-lg: 0 16px 56px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.3);
+
+  /* ── Border radii ────────────────────── */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+
+  /* ── Typography ──────────────────────── */
+  --font:   'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --font-d: 'Sora', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+
+  /* ── Layout ──────────────────────────── */
+  --nav-h: 68px;
+}
+
+/* ─── Reset ─────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+html, body, #root {
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.6;
+  background: var(--surface);
+  color: var(--l1);
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font); cursor: pointer; }
+input, textarea, select { font-family: var(--font); }
+img { max-width: 100%; display: block; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 3px; }
+
+/* ─── Keyframes ─────────────────────────────── */
+@keyframes fadeIn  { from { opacity: 0; }               to { opacity: 1; } }
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes float   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes blink   { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes pulse   { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0; } }
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes ripple  { 0% { transform: scale(0.5); opacity: 0.7; } 100% { transform: scale(1.8); opacity: 0; } }
+
+/* ─── Animation helpers ─────────────────────── */
+.fade-in    { animation: fadeIn  0.3s ease both; }
+.fade-up    { animation: fadeUp  0.4s ease both; }
+.fade-up-1  { animation: fadeUp  0.6s 0.1s ease both; }
+.fade-up-2  { animation: fadeUp  0.6s 0.2s ease both; }
+.fade-up-3  { animation: fadeUp  0.6s 0.3s ease both; }
+
+/* ─── Shared UI: Modal ──────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-box {
+  background: #fff;
+  border: 0.5px solid rgba(60, 60, 67, 0.18);
+  border-radius: var(--r-xl);
+  padding: 34px;
+  width: 100%;
+  max-width: 420px;
+  margin: 16px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16);
+  animation: fadeUp 0.3s ease both;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--bg);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: var(--l3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+.modal-close:hover { background: var(--sep); }
+
+/* ─── Shared UI: Toast ──────────────────────── */
+.toast-bar {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(28, 28, 30, 0.92);
+  backdrop-filter: blur(20px);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: var(--r-md);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 900;
+  white-space: nowrap;
+  animation: fadeUp 0.3s ease both;
+  pointer-events: none;
+}
+
+/* ─── Shared UI: Badges ─────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.badge-ok     { background: rgba(52,199,89,.12);  color: #1A7F37; }
+.badge-ok::before     { background: #34C759; }
+.badge-warn   { background: rgba(255,149,0,.12);  color: #B25000; }
+.badge-warn::before   { background: #FF9500; }
+.badge-danger { background: rgba(255,59,48,.1);   color: #C0392B; }
+.badge-danger::before { background: #FF3B30; }
+.badge-blue   { background: rgba(27,79,168,.1);   color: var(--blue); }
+.badge-blue::before   { background: var(--blue); }
+
+/* ─── Shared UI: Buttons ────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: var(--blue);
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 12px 22px;
+  cursor: pointer;
+  box-shadow: var(--blue-glow);
+  transition: background 0.15s, transform 0.1s;
+}
+.btn-primary:hover  { background: var(--blue-dk); transform: translateY(-1px); }
+.btn-primary:active { transform: none; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  background: var(--blue-lt);
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-secondary:hover { background: var(--blue-lt2); }
+
+/* ─── Shared Form ────────────────────────────── */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.form-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--l3);
+}
+.form-input {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--l1);
+  background: #F2F2F7;
+  border: 1.5px solid transparent;
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.form-input::placeholder { color: var(--l4); }
+.form-input:focus {
+  background: #fff;
+  border-color: rgba(27, 79, 168, 0.35);
+  box-shadow: 0 0 0 4px rgba(27, 79, 168, 0.09);
+}
+.form-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+select.form-input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236C6C70' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+select.form-input:focus { background-color: #fff; }
+
+/* ─── Grid utilities ─────────────────────────── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr;         gap: 14px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr);  gap: 14px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr);  gap: 12px; }
+
+/* ─── Responsive grid ───────────────────────── */
+@media (max-width: 960px) {
+  .g3, .g4 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .g2, .g3, .g4 { grid-template-columns: 1fr; }
+}

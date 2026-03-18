@@ -1,0 +1,479 @@
+/* ═══════════════════════════════════════════════
+   PORTAL — Light Theme (Cupertino / iOS style)
+   Todas as variáveis do portal ficam aqui,
+   dentro de .portal-root para não vazar pro site.
+═══════════════════════════════════════════════ */
+
+.portal-root {
+  /* ── Colors ────────────────────────────── */
+  --p-bg:         #F2F2F7;
+  --p-surface:    #FFFFFF;
+  --p-surface2:   #F9F9FB;
+  --p-l1:         #1C1C1E;
+  --p-l2:         #3C3C43;
+  --p-l3:         #6C6C70;
+  --p-l4:         #AEAEB2;
+  --p-sep:        rgba(60, 60, 67, 0.13);
+  --p-sep2:       rgba(60, 60, 67, 0.22);
+
+  /* ── Shadows ────────────────────────────── */
+  --p-sh-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --p-sh-md:  0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+  --p-sh-lg:  0 12px 40px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.05);
+
+  /* ── Layout ─────────────────────────────── */
+  --p-sidebar-w:  248px;
+  --p-topbar-h:   64px;
+}
+
+/* ─── Portal root wrapper ─────────────────────── */
+.portal-root {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--p-bg);
+}
+
+/* ═══ SIDEBAR ════════════════════════════════════ */
+.p-sidebar {
+  width: var(--p-sidebar-w);
+  background: var(--p-surface);
+  border-right: 0.5px solid var(--p-sep);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+  box-shadow: 1px 0 0 rgba(60, 60, 67, 0.08);
+  transition: transform 0.3s ease;
+  /* Always visible on desktop — no transform */
+}
+
+/* Mobile: slides in as drawer */
+.p-sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease;
+}
+
+.p-sidebar-logo {
+  padding: 18px 20px 16px;
+  border-bottom: 0.5px solid var(--p-sep);
+  flex-shrink: 0;
+}
+
+.p-sidebar-user {
+  padding: 14px 16px;
+  border-bottom: 0.5px solid var(--p-sep);
+  flex-shrink: 0;
+}
+
+.p-sidebar-user-av {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.p-nav-section {
+  padding: 16px 18px 5px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--p-l4);
+}
+
+.p-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 14px;
+  border-radius: var(--r-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--p-l2);
+  cursor: pointer;
+  margin: 1px 10px;
+  background: transparent;
+  border: none;
+  width: calc(100% - 20px);
+  text-align: left;
+  font-family: var(--font);
+  transition: background 0.12s, color 0.12s;
+  position: relative;
+}
+.p-nav-item:hover {
+  background: rgba(27, 79, 168, 0.06);
+  color: var(--blue);
+}
+.p-nav-item.active {
+  background: rgba(27, 79, 168, 0.09);
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.p-nav-ico {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  background: rgba(60, 60, 67, 0.06);
+  transition: background 0.12s;
+}
+.p-nav-item.active .p-nav-ico {
+  background: rgba(27, 79, 168, 0.12);
+}
+
+.p-nav-badge {
+  margin-left: auto;
+  background: #FF3B30;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-sidebar-bottom {
+  margin-top: auto;
+  padding: 12px;
+  border-top: 0.5px solid var(--p-sep);
+  flex-shrink: 0;
+}
+
+.p-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 9px 14px;
+  border-radius: var(--r-sm);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--p-l3);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.p-logout-btn:hover {
+  background: rgba(255, 59, 48, 0.07);
+  color: #C0392B;
+}
+
+/* ═══ MAIN CONTENT ═══════════════════════════════ */
+.p-main {
+  margin-left: var(--p-sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--p-bg);
+  overflow: hidden;
+}
+
+/* ═══ TOPBAR ════════════════════════════════════ */
+.p-topbar {
+  height: var(--p-topbar-h);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 0.5px solid var(--p-sep);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 1px 0 rgba(60, 60, 67, 0.08);
+  flex-shrink: 0;
+}
+
+.p-topbar-title {
+  font-family: var(--font-d);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--p-l1);
+  letter-spacing: -0.02em;
+}
+
+/* ═══ PAGE CONTENT ══════════════════════════════ */
+.p-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 32px;
+}
+
+/* ─── Page header ─────────────────────────────── */
+.p-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.p-page-title {
+  font-family: var(--font-d);
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
+  color: var(--p-l1);
+  letter-spacing: -0.03em;
+  margin-bottom: 3px;
+}
+
+.p-page-sub {
+  font-size: 13px;
+  color: var(--p-l3);
+}
+
+/* ═══ PORTAL CARD ═══════════════════════════════ */
+.portal-card {
+  background: var(--p-surface);
+  border: 0.5px solid var(--p-sep);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  box-shadow: var(--p-sh-sm);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.portal-card:hover { box-shadow: var(--p-sh-md); }
+
+/* ═══ TABLE ════════════════════════════════════ */
+.p-table {
+  background: var(--p-surface);
+  border: 0.5px solid var(--p-sep);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--p-sh-sm);
+}
+
+.p-table-head {
+  display: grid;
+  padding: 10px 20px;
+  background: var(--p-bg);
+  border-bottom: 0.5px solid var(--p-sep);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--p-l4);
+}
+
+.p-table-row {
+  display: grid;
+  padding: 14px 20px;
+  border-bottom: 0.5px solid var(--p-sep);
+  align-items: center;
+  transition: background 0.12s;
+}
+.p-table-row:last-child { border-bottom: none; }
+.p-table-row:hover { background: rgba(27, 79, 168, 0.03); }
+
+/* ─── Mobile burger ──────────────────────────── */
+.p-burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  color: var(--p-l2);
+  transition: background 0.12s;
+}
+.p-burger:hover { background: rgba(60, 60, 67, 0.07); }
+
+/* ═══ HOVER UTILITIES ═══════════════════════════ */
+.hover-blue-lt {
+  transition: background 0.15s;
+}
+.hover-blue-lt:hover {
+  background: var(--blue-lt) !important;
+}
+
+.hover-card-lift {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.hover-card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--p-sh-md);
+}
+
+/* ─── Portal quick-action button ─────────────── */
+.p-quick-action {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  font-family: var(--font);
+  transition: background 0.12s, color 0.12s;
+}
+.p-quick-action:hover {
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+.p-quick-action.danger {
+  color: var(--p-l3);
+}
+.p-quick-action.danger:hover {
+  background: rgba(255, 59, 48, 0.07);
+  color: #C0392B;
+}
+
+/* ─── Topbar action buttons ──────────────────── */
+.p-topbar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  background: var(--bg);
+  border: 0.5px solid var(--sep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s;
+}
+.p-topbar-btn:hover { background: var(--blue-lt); }
+
+.p-topbar-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 0.5px solid var(--sep);
+  border-radius: var(--r-sm);
+  padding: 6px 12px 6px 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.p-topbar-user-btn:hover { background: var(--blue-lt); }
+
+/* ─── Speed test retest button ───────────────── */
+.p-retest-btn {
+  margin-top: 10px;
+  width: 100%;
+  background: var(--bg);
+  border: 0.5px solid var(--sep);
+  color: var(--blue);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.p-retest-btn:hover { background: var(--blue-lt); }
+
+/* ─── Report card hover ─────────────────────── */
+.p-report-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.p-report-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--p-sh-md);
+}
+
+/* ─── Login hover buttons ────────────────────── */
+.login-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: none;
+  border: none;
+  color: var(--l3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: var(--r-xs);
+  transition: color 0.15s, background 0.15s;
+}
+.login-back-btn:hover {
+  background: var(--bg);
+  color: var(--l1);
+}
+
+.login-demo-chip {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--sep);
+  border-radius: var(--r-sm);
+  padding: 9px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.login-demo-chip:hover {
+  background: var(--blue-lt);
+  border-color: rgba(27, 79, 168, 0.22);
+}
+
+/* ═══ RESPONSIVE ════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Sidebar vira drawer no mobile */
+  .p-sidebar {
+    transform: translateX(-100%);
+    width: 248px;
+  }
+  .p-sidebar.open {
+    transform: translateX(0);
+    box-shadow: var(--p-sh-lg), 4px 0 20px rgba(0,0,0,.12);
+  }
+  .p-sidebar-backdrop.open {
+    display: block;
+  }
+
+  /* Main ocupa tudo */
+  .p-main { margin-left: 0; }
+
+  /* Burger aparece */
+  .p-burger { display: flex !important; }
+
+  /* Padding menor */
+  .p-content { padding: 20px 16px; }
+  .p-topbar  { padding: 0 16px; }
+}
+
+@media (max-width: 640px) {
+  .p-page-title { font-size: 20px; }
+}
