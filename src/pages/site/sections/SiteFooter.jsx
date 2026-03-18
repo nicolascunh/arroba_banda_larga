@@ -1,4 +1,5 @@
 import React from 'react'
+import { Facebook, Instagram, Youtube, Linkedin } from 'lucide-react'
 import Logo from '@/components/shared/Logo'
 
 const COLS = [
@@ -8,10 +9,10 @@ const COLS = [
 ]
 
 const SOCIAL = [
-  ['📘', 'https://facebook.com/arrobabandalarga', 'Facebook'],
-  ['📷', 'https://instagram.com/arrobabandalarga', 'Instagram'],
-  ['▶️', 'https://youtube.com/channel/UC-YJjbmFdNjxVUCvX1xyYEg', 'YouTube'],
-  ['💼', 'https://br.linkedin.com/company/arroba-banda-larga', 'LinkedIn'],
+  [Facebook,  'https://facebook.com/arrobabandalarga', 'Facebook'],
+  [Instagram, 'https://instagram.com/arrobabandalarga', 'Instagram'],
+  [Youtube,   'https://youtube.com/channel/UC-YJjbmFdNjxVUCvX1xyYEg', 'YouTube'],
+  [Linkedin,  'https://br.linkedin.com/company/arroba-banda-larga', 'LinkedIn'],
 ]
 
 export default function SiteFooter() {
@@ -25,8 +26,8 @@ export default function SiteFooter() {
             <div style={{ fontSize: 11.5, color: 'rgba(255,255,255,.22)', marginTop: 12, lineHeight: 1.6 }}>CNPJ: 12.458.616/0001-90<br />Av. Tancredo Neves, 104 — Campos dos Goytacazes/RJ</div>
             <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
               {SOCIAL.map(([ico, href, label]) => (
-                <a key={ico} href={href} target="_blank" rel="noreferrer" className="footer-social-link" aria-label={label}>
-                  {ico}
+                <a key={label} href={href} target="_blank" rel="noreferrer" className="footer-social-link" aria-label={label}>
+                  {React.createElement(ico, { size: 16 })}
                 </a>
               ))}
             </div>
@@ -42,7 +43,7 @@ export default function SiteFooter() {
             </nav>
           ))}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div className="footer-bottom">
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,.25)' }}>© 2025 Arroba Banda Larga Eireli. Todos os direitos reservados.</span>
           <div style={{ display: 'flex', gap: 20 }}>
             {[['Privacidade', 'https://www.arrobabandalarga.com.br/new/politica-de-privacidade-2/'], ['Termos', '#'], ['ANATEL', '#']].map(([l, h]) => (

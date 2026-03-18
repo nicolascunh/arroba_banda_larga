@@ -2,8 +2,8 @@ import React from 'react'
 
 const PLANS = [
   { speed: '600', unit: 'Mega', tier: 'Família', priceInt: '89', priceDec: ',70', price: 89.70, feat: false, wifi: 'Wi-Fi 5', dl: 600 },
-  { speed: '800', unit: 'Mega', tier: 'Premium', priceInt: '99', priceDec: ',70', price: 99.70, feat: true,  wifi: 'Wi-Fi 5', dl: 800 },
-  { speed: '1',   unit: 'Giga', tier: 'Ultra',   priceInt: '119',priceDec: ',70', price: 119.70,feat: false, wifi: 'Wi-Fi 6', dl: 920 },
+  { speed: '800', unit: 'Mega', tier: 'Premium', priceInt: '99', priceDec: ',70', price: 99.70, feat: false, wifi: 'Wi-Fi 5', dl: 800 },
+  { speed: '1',   unit: 'Giga', tier: 'Ultra',   priceInt: '119',priceDec: ',70', price: 119.70,feat: true,  wifi: 'Wi-Fi 6', dl: 920 },
 ]
 
 export default function Plans() {
@@ -20,8 +20,8 @@ export default function Plans() {
         <div className="plans-grid">
           {PLANS.map((p) => (
             <div key={p.speed} className={`plan-card${p.feat ? ' featured' : ''}`}>
-              {p.feat && <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--amber)', color: '#fff', fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.07em', padding: '4px 16px', borderRadius: 20, whiteSpace: 'nowrap', boxShadow: '0 3px 12px rgba(245,162,0,.45)' }}>✦ Mais popular</div>}
-              <div style={{ fontFamily: 'var(--font-d)', fontSize: 56, fontWeight: 800, letterSpacing: '-.05em', lineHeight: 1, color: p.feat ? 'transparent' : 'var(--blue)', background: p.feat ? 'linear-gradient(135deg,#5B9BFF,#fff)' : undefined, WebkitBackgroundClip: p.feat ? 'text' : undefined, backgroundClip: p.feat ? 'text' : undefined }}>{p.speed}</div>
+              {p.feat && <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg, var(--amber), #E09200)', color: '#fff', fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.07em', padding: '5px 18px', borderRadius: 20, whiteSpace: 'nowrap', boxShadow: '0 3px 12px rgba(245,162,0,.45)', zIndex: 2 }}>✦ Mais popular</div>}
+              <div style={{ fontFamily: 'var(--font-d)', fontSize: 'clamp(40px,8vw,56px)', fontWeight: 800, letterSpacing: '-.05em', lineHeight: 1, color: p.feat ? 'transparent' : 'var(--blue)', background: p.feat ? 'linear-gradient(135deg,#5B9BFF,#fff)' : undefined, WebkitBackgroundClip: p.feat ? 'text' : undefined, backgroundClip: p.feat ? 'text' : undefined }}>{p.speed}</div>
               <div style={{ fontSize: 13, fontWeight: 700, color: p.feat ? 'rgba(255,255,255,.5)' : 'var(--l3)', marginBottom: 4 }}>{p.unit} simétrico</div>
               <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.07em', color: p.feat ? 'rgba(255,255,255,.35)' : 'var(--l3)', marginBottom: 20 }}>{p.tier}</div>
               <div style={{ height: '0.5px', background: p.feat ? 'rgba(255,255,255,.1)' : 'rgba(60,60,67,.12)', marginBottom: 20 }} />
@@ -35,7 +35,7 @@ export default function Plans() {
               </ul>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginBottom: 22 }}>
                 <span style={{ fontSize: 17, fontWeight: 700, color: p.feat ? '#fff' : 'var(--l1)' }}>R$</span>
-                <span style={{ fontFamily: 'var(--font-d)', fontSize: 44, fontWeight: 800, color: p.feat ? '#fff' : 'var(--l1)', letterSpacing: '-.04em', lineHeight: 1 }}>{p.priceInt}</span>
+                <span style={{ fontFamily: 'var(--font-d)', fontSize: 'clamp(32px,6vw,44px)', fontWeight: 800, color: p.feat ? '#fff' : 'var(--l1)', letterSpacing: '-.04em', lineHeight: 1 }}>{p.priceInt}</span>
                 <span style={{ fontSize: 22, fontWeight: 700, color: p.feat ? '#fff' : 'var(--l1)' }}>{p.priceDec}</span>
                 <span style={{ fontSize: 13, color: p.feat ? 'rgba(255,255,255,.5)' : 'var(--l3)', fontWeight: 500, marginLeft: 2 }}>/mês</span>
               </div>

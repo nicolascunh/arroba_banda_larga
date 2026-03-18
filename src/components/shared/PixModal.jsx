@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useApp } from '@/hooks/useApp'
 import { fmtBRL } from '@/data/mockData'
+import { Check, Copy, Lock } from 'lucide-react'
 
 // ⚠️  ATENÇÃO: As funções abaixo geram dados DEMO/MOCK para fins de demonstração.
 // Em produção, os códigos PIX e boleto devem ser obtidos de uma API de pagamento
@@ -110,7 +111,7 @@ export default function PixModal({ price, onClose }) {
 
   return (
     <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="modal-box" style={{ maxWidth: 390 }}>
+      <div className="modal-box" style={{ maxWidth: 390 }} role="dialog" aria-modal="true" aria-label="Pagamento">
         <button className="modal-close" onClick={onClose}>✕</button>
 
         {/* Amount */}
@@ -155,7 +156,7 @@ export default function PixModal({ price, onClose }) {
               style={{ width: '100%', justifyContent: 'center', background: copied ? '#34C759' : undefined, boxShadow: copied ? '0 5px 18px rgba(52,199,89,.35)' : undefined }}
               onClick={() => copy(pixCode)}
             >
-              {copied ? '✅ Copiado!' : '📋 Copiar codigo PIX'}
+              {copied ? <><Check size={15} /> Copiado!</> : <><Copy size={15} /> Copiar codigo PIX</>}
             </button>
           </>
         )}
@@ -168,7 +169,7 @@ export default function PixModal({ price, onClose }) {
               {barcode}
             </div>
             <button className="btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => copy(barcode)}>
-              📋 Copiar codigo de barras
+              <Copy size={15} /> Copiar codigo de barras
             </button>
           </>
         )}
@@ -198,7 +199,7 @@ export default function PixModal({ price, onClose }) {
             </div>
             <button className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}
               onClick={() => { showToast('Pagamento aprovado! ✅'); onClose() }}>
-              🔒 Pagar {fmtBRL(price)}
+              <Lock size={15} /> Pagar {fmtBRL(price)}
             </button>
           </>
         )}

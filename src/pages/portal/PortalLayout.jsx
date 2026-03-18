@@ -10,11 +10,12 @@ export default function PortalLayout() {
 
   return (
     <div className="portal-root">
+      <a href="#portal-content" className="skip-to-content">Pular para o conteúdo</a>
       <PortalSidebar />
 
       <div className="p-main">
         <PortalTopbar />
-        <div className="p-content">
+        <div className="p-content" id="portal-content">
           <Outlet />
         </div>
       </div>

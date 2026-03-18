@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useApp } from '@/hooks/useApp'
 import { MOCK_USERS } from '@/data/mockData'
 import Logo from '@/components/shared/Logo'
+import { ArrowLeft } from 'lucide-react'
 
 const DEMO_USERS = [
   { key: 'nicolas', label: 'Nicolas',   plan: '800 Mega', gradient: 'linear-gradient(135deg,#1B4FA8,#2060D4)' },
@@ -17,12 +18,20 @@ export default function Login() {
   const [pass,    setPass]    = useState('')
   const [loading, setLoading] = useState(false)
   const [error,   setError]   = useState('')
+  const [fieldErrors, setFieldErrors] = useState({})
 
   const login = (key = null) => {
-    if (!key && (!cpf.trim() || !pass)) {
-      setError('⚠️ Preencha CPF/e-mail e senha.')
-      return
+    if (!key) {
+      const errs = {}
+      if (!cpf.trim()) errs.cpf = true
+      if (!pass) errs.pass = true
+      if (Object.keys(errs).length) {
+        setFieldErrors(errs)
+        setError('Preencha CPF/e-mail e senha.')
+        return
+      }
     }
+    setFieldErrors({})
     setError('')
     setLoading(true)
     setTimeout(() => {
@@ -74,7 +83,7 @@ export default function Login() {
           onClick={() => navigate('/')}
           className="login-back-btn"
         >
-          ← Voltar ao site
+          <ArrowLeft size={14} /> Voltar ao site
         </button>
 
         {/* Logo + heading */}
@@ -94,11 +103,11 @@ export default function Login() {
         <div className="form-field">
           <label className="form-label">CPF ou E-mail</label>
           <input
-            className="form-input"
+            className={`form-input${fieldErrors.cpf ? ' error' : ''}`}
             type="text"
             placeholder="000.000.000-00 ou e-mail"
             value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
+            onChange={(e) => { setCpf(e.target.value); setFieldErrors(f => ({...f, cpf: false})) }}
             onKeyDown={(e) => e.key === 'Enter' && login()}
             autoComplete="username"
           />
@@ -106,11 +115,11 @@ export default function Login() {
         <div className="form-field">
           <label className="form-label">Senha</label>
           <input
-            className="form-input"
+            className={`form-input${fieldErrors.pass ? ' error' : ''}`}
             type="password"
             placeholder="••••••••"
             value={pass}
-            onChange={(e) => setPass(e.target.value)}
+            onChange={(e) => { setPass(e.target.value); setFieldErrors(f => ({...f, pass: false})) }}
             onKeyDown={(e) => e.key === 'Enter' && login()}
             autoComplete="current-password"
           />

@@ -2,19 +2,20 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useApp } from '@/hooks/useApp'
 import Logo from '@/components/shared/Logo'
+import { Home, CreditCard, FileText, Receipt, BarChart3, TrendingUp, Headphones, User, LogOut } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { id: 'dashboard',   icon: '🏠', label: 'Início',        badge: null },
-  { id: 'faturas',     icon: '💳', label: 'Faturas',       badge: 1    },
-  { id: 'contratos',   icon: '📋', label: 'Contratos',     badge: null },
-  { id: 'notas',       icon: '🧾', label: 'Notas Fiscais', badge: null },
-  { id: 'consumo',     icon: '📊', label: 'Consumo',       badge: null },
-  { id: 'relatorios',  icon: '📈', label: 'Relatórios',    badge: null },
-  { id: 'atendimento', icon: '🎧', label: 'Atendimento',   badge: 1    },
+  { id: 'dashboard',   icon: Home,        label: 'Início',        badge: null },
+  { id: 'faturas',     icon: CreditCard,  label: 'Faturas',       badge: 1    },
+  { id: 'contratos',   icon: FileText,    label: 'Contratos',     badge: null },
+  { id: 'notas',       icon: Receipt,     label: 'Notas Fiscais', badge: null },
+  { id: 'consumo',     icon: BarChart3,   label: 'Consumo',       badge: null },
+  { id: 'relatorios',  icon: TrendingUp,  label: 'Relatórios',    badge: null },
+  { id: 'atendimento', icon: Headphones,  label: 'Atendimento',   badge: 1    },
 ]
 
 const ACCOUNT_ITEMS = [
-  { id: 'perfil', icon: '👤', label: 'Meu Perfil', badge: null },
+  { id: 'perfil', icon: User, label: 'Meu Perfil', badge: null },
 ]
 
 function NavItem({ item, active, onClick }) {
@@ -23,7 +24,7 @@ function NavItem({ item, active, onClick }) {
       className={`p-nav-item${active ? ' active' : ''}`}
       onClick={() => onClick(item.id)}
     >
-      <span className="p-nav-ico">{item.icon}</span>
+      <span className="p-nav-ico">{React.createElement(item.icon, { size: 16 })}</span>
       {item.label}
       {item.badge && <span className="p-nav-badge">{item.badge}</span>}
     </button>
@@ -117,7 +118,7 @@ export default function PortalSidebar() {
         {/* Logout */}
         <div className="p-sidebar-bottom">
           <button className="p-logout-btn" onClick={doLogout}>
-            <span style={{ fontSize: 16 }}>↩</span>
+            <LogOut size={16} />
             Sair da conta
           </button>
         </div>

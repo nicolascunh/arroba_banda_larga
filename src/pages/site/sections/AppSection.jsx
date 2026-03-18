@@ -1,8 +1,9 @@
 import React from 'react'
+import { Smartphone } from 'lucide-react'
 
 const STORES = [
-  { label: 'App Store', sub: 'Disponível na', href: 'https://apps.apple.com/br/app/arroba-internet-banda-larga/id1569041426', ico: '🍎' },
-  { label: 'Google Play', sub: 'Disponível no', href: 'https://play.google.com/store/apps/details?id=br.com.arrobanettv.central', ico: '🤖' },
+  { label: 'App Store', sub: 'Disponível na', href: 'https://apps.apple.com/br/app/arroba-internet-banda-larga/id1569041426', ico: Smartphone },
+  { label: 'Google Play', sub: 'Disponível no', href: 'https://play.google.com/store/apps/details?id=br.com.arrobanettv.central', ico: Smartphone },
 ]
 
 const FEATURES = [
@@ -24,7 +25,7 @@ export default function AppSection() {
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {STORES.map((a) => (
               <a key={a.label} href={a.href} target="_blank" rel="noreferrer" className="app-store-btn">
-                <span style={{ fontSize: 22 }}>{a.ico}</span>
+                <span>{React.createElement(a.ico, { size: 22, color: 'rgba(255,255,255,0.8)' })}</span>
                 <div><div style={{ fontSize: 10, fontWeight: 500, color: 'rgba(255,255,255,.5)' }}>{a.sub}</div>{a.label}</div>
               </a>
             ))}
@@ -55,7 +56,7 @@ export default function AppSection() {
                         <div style={{ fontSize: 8, color: 'rgba(255,255,255,.55)', marginTop: 2 }}>● Conexão Ativa</div>
                       </div>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 5 }}>
-                        {['💳 Pagar', '⚡ Velocidade'].map((b) => <div key={b} style={{ background: '#fff', borderRadius: 9, padding: 8, textAlign: 'center', fontSize: 8, fontWeight: 600, color: '#1B4FA8' }}>{b}</div>)}
+                        {['Pagar', 'Velocidade'].map((b) => <div key={b} style={{ background: '#fff', borderRadius: 9, padding: 8, textAlign: 'center', fontSize: 8, fontWeight: 600, color: '#1B4FA8' }}>{b}</div>)}
                       </div>
                       <div style={{ background: '#fff', borderRadius: 9, padding: 8 }}>
                         <div style={{ fontSize: 8, fontWeight: 700, color: '#000', marginBottom: 3 }}>Próxima fatura</div>

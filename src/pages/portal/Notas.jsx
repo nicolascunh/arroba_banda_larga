@@ -2,6 +2,7 @@ import React from 'react'
 import { useApp } from '@/hooks/useApp'
 import { getMockNotas, fmtBRL } from '@/data/mockData'
 import StatusBadge from '@/components/portal/StatusBadge'
+import { Download } from 'lucide-react'
 
 const COL = '1.2fr 1fr 110px 110px 100px 100px'
 
@@ -33,10 +34,10 @@ export default function Notas() {
             <div><StatusBadge status={n.status} /></div>
             <div>
               <button
-                style={{ fontFamily: 'var(--font)', fontSize: 11, fontWeight: 700, background: 'var(--bg)', color: 'var(--blue)', border: '1px solid var(--sep)', borderRadius: 7, padding: '6px 10px', cursor: 'pointer' }}
+                style={{ fontFamily: 'var(--font)', fontSize: 11, fontWeight: 700, background: 'var(--bg)', color: 'var(--blue)', border: '1px solid var(--sep)', borderRadius: 7, padding: '6px 10px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 4 }}
                 onClick={() => showToast('Download iniciado!')}
               >
-                ⬇ PDF
+                <Download size={12} /> PDF
               </button>
             </div>
           </div>

@@ -10,7 +10,7 @@ export default function Testimonials() {
   return (
     <section className="site-section" id="depoimentos" style={{ background: 'var(--bg)' }}>
       <div className="site-container">
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 48, flexWrap: 'wrap', gap: 20 }}>
+        <div className="testimonials-header">
           <div>
             <div className="site-kicker">O que dizem os clientes</div>
             <h2 className="site-h2" style={{ marginBottom: 0 }}>+2.000 avaliações<br />no Google</h2>

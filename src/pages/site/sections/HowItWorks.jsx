@@ -1,10 +1,11 @@
 import React from 'react'
+import { Search, ClipboardList, CalendarCheck, Rocket } from 'lucide-react'
 
 const STEPS = [
-  { ico: '🔍', title: 'Consulte o CEP',  desc: 'Verifique se sua rua tem cobertura disponível' },
-  { ico: '📋', title: 'Escolha o Plano', desc: '600 Mega, 800 Mega ou 1 Giga — conforme seu uso' },
-  { ico: '📅', title: 'Agendamento',     desc: 'Escolha o dia e horário ideal para a instalação' },
-  { ico: '🚀', title: 'Conectado!',      desc: 'Técnico instala e você já navega em fibra pura' },
+  { ico: Search,        color: '#fff',    title: 'Consulte o CEP',  desc: 'Verifique se sua rua tem cobertura disponível' },
+  { ico: ClipboardList, color: '#1B4FA8', title: 'Escolha o Plano', desc: '600 Mega, 800 Mega ou 1 Giga — conforme seu uso' },
+  { ico: CalendarCheck, color: '#1B4FA8', title: 'Agendamento',     desc: 'Escolha o dia e horário ideal para a instalação' },
+  { ico: Rocket,        color: '#1B4FA8', title: 'Conectado!',      desc: 'Técnico instala e você já navega em fibra pura' },
 ]
 
 export default function HowItWorks() {
@@ -20,7 +21,7 @@ export default function HowItWorks() {
           {STEPS.map((s, i) => (
             <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '0 14px' }}>
               <div className="how-it-works-step" style={{ background: i === 0 ? 'var(--blue)' : 'var(--bg)', border: `1.5px solid ${i === 0 ? 'var(--blue)' : 'var(--sep)'}` }}>
-                {s.ico}
+                {React.createElement(s.ico, { size: 22, color: s.color, strokeWidth: 2 })}
               </div>
               <h3 style={{ fontFamily: 'var(--font-d)', fontSize: 15, fontWeight: 700, color: 'var(--l1)', marginBottom: 8 }}>{s.title}</h3>
               <p style={{ fontSize: 13, color: 'var(--l3)', lineHeight: 1.65 }}>{s.desc}</p>

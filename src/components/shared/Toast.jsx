@@ -2,5 +2,12 @@ import React from 'react'
 
 export default function Toast({ message }) {
   if (!message) return null
-  return <div className="toast-bar">{message}</div>
+
+  const type = message.includes('!') && !message.includes('erro') ? 'toast-success' : 'toast-info'
+
+  return (
+    <div className={`toast-bar ${type}`} role="status" aria-live="polite">
+      {message}
+    </div>
+  )
 }

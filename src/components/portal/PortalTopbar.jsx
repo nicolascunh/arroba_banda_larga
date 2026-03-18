@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useApp } from '@/hooks/useApp'
+import { Bell } from 'lucide-react'
 
 const PAGE_LABELS = {
   dashboard:   'Início',
@@ -48,7 +49,7 @@ export default function PortalTopbar() {
           className="p-topbar-btn"
           aria-label="Notificações"
         >
-          🔔
+          <Bell size={16} />
           <div style={{
             position: 'absolute', top: -3, right: -3,
             width: 14, height: 14, borderRadius: '50%',

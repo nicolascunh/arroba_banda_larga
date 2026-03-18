@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useApp } from '@/hooks/useApp'
 import { getMockFaturas, fmtBRL } from '@/data/mockData'
 import PixModal from '@/components/shared/PixModal'
+import { DashboardSkeleton } from '@/components/shared/Skeleton'
+import { CreditCard, Calendar, CheckCircle, Headphones, Radio } from 'lucide-react'
 
 // ─── Speed Gauge ─────────────────────────────
 function SpeedGauge({ maxSpeed }) {
@@ -93,7 +95,13 @@ export default function Dashboard() {
   const { user } = useApp()
   const navigate = useNavigate()
   const [pixOpen, setPix] = useState(false)
+  const [loading, setLoading] = useState(true)
   const faturas = getMockFaturas(user.plan.price)
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 800)
+    return () => clearTimeout(t)
+  }, [])
 
   const now = new Date()
   const hrs = now.getHours()
@@ -101,12 +109,14 @@ export default function Dashboard() {
   const DAYS = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']
   const MONTHS = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
+  if (loading) return <DashboardSkeleton />
+
   return (
     <div className="fade-in">
       {/* Greeting */}
       <div style={{ marginBottom: 24 }}>
         <h1 style={{ fontFamily: 'var(--font-d)', fontSize: 'clamp(20px,2.5vw,28px)', fontWeight: 800, color: 'var(--p-l1)', letterSpacing: '-.03em', marginBottom: 4 }}>
-          {greeting}, {user.name} 👋
+          {greeting}, {user.name}
         </h1>
         <p style={{ fontSize: 13.5, color: 'var(--p-l3)' }}>
           {DAYS[now.getDay()]}, {now.getDate()} de {MONTHS[now.getMonth()]} · Tudo certo com sua conexão
@@ -145,7 +155,7 @@ export default function Dashboard() {
           <div style={{ fontSize: 11.5, color: 'var(--p-l3)', marginBottom: 'auto', paddingBottom: 16 }}>Referência: Março/2025 · Venc. 15/03</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <button className="btn-primary" style={{ justifyContent: 'center', width: '100%', fontSize: 14, padding: 12 }} onClick={() => setPix(true)}>
-              💳 Pagar agora
+              <CreditCard size={16} /> Pagar agora
             </button>
             <button className="btn-secondary" style={{ justifyContent: 'center', width: '100%', fontSize: 13 }} onClick={() => navigate('/portal/faturas')}>
               Ver histórico de faturas →
@@ -157,13 +167,13 @@ export default function Dashboard() {
       {/* Stats row */}
       <div className="g4" style={{ marginBottom: 14 }}>
         {[
-          { ico: '📅', lbl: 'Tempo de serviço', v: `${user.months} meses`, sub: `Desde ${user.since}` },
-          { ico: '✅', lbl: 'Uptime médio',       v: '99,8%',               sub: 'Últimos 30 dias', c: '#1A7F37' },
-          { ico: '🎧', lbl: 'Chamados abertos',   v: '1',                   sub: 'Em andamento',    c: '#B25000' },
-          { ico: '💳', lbl: 'Pendências',          v: 'Nenhuma',             sub: 'Tudo em dia',     c: '#1A7F37' },
+          { ico: Calendar,    lbl: 'Tempo de serviço', v: `${user.months} meses`, sub: `Desde ${user.since}` },
+          { ico: CheckCircle, lbl: 'Uptime médio',       v: '99,8%',               sub: 'Últimos 30 dias', c: '#1A7F37' },
+          { ico: Headphones,  lbl: 'Chamados abertos',   v: '1',                   sub: 'Em andamento',    c: '#B25000' },
+          { ico: CreditCard,  lbl: 'Pendências',          v: 'Nenhuma',             sub: 'Tudo em dia',     c: '#1A7F37' },
         ].map((s) => (
           <div key={s.lbl} className="portal-card" style={{ padding: 18 }}>
-            <div style={{ fontSize: 22, marginBottom: 10 }}>{s.ico}</div>
+            <div style={{ marginBottom: 10 }}>{React.createElement(s.ico, { size: 18 })}</div>
             <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.07em', color: 'var(--p-l4)', marginBottom: 5 }}>{s.lbl}</div>
             <div style={{ fontFamily: 'var(--font-d)', fontSize: 20, fontWeight: 800, color: s.c || 'var(--p-l1)', letterSpacing: '-.03em', lineHeight: 1 }}>{s.v}</div>
             <div style={{ fontSize: 11, color: 'var(--p-l3)', marginTop: 3 }}>{s.sub}</div>
@@ -189,13 +199,13 @@ export default function Dashboard() {
       <div className="portal-card">
         <div style={{ fontFamily: 'var(--font-d)', fontSize: 14, fontWeight: 700, color: 'var(--p-l1)', marginBottom: 16 }}>Atividade Recente</div>
         {[
-          { ico: '✅', bg: 'rgba(52,199,89,.1)',  title: 'Fatura Fevereiro paga',      sub: 'Via PIX',                v: fmtBRL(user.plan.price), vc: '#1A7F37', date: '15/02/2025' },
-          { ico: '🎧', bg: 'rgba(27,79,168,.1)',  title: 'Chamado #4521 resolvido',    sub: 'Lentidão · 2h resolução', v: 'Resolvido',             vc: '#1A7F37', date: '10/02/2025' },
-          { ico: '✅', bg: 'rgba(52,199,89,.1)',  title: 'Fatura Janeiro paga',        sub: 'Via boleto',              v: fmtBRL(user.plan.price), vc: '#1A7F37', date: '15/01/2025' },
-          { ico: '📡', bg: 'rgba(245,162,0,.1)', title: 'Manutenção preventiva',      sub: 'Firmware atualizado',     v: 'Concluído',             vc: '#B25000', date: '03/01/2025' },
+          { ico: CheckCircle, bg: 'rgba(52,199,89,.1)',  title: 'Fatura Fevereiro paga',      sub: 'Via PIX',                v: fmtBRL(user.plan.price), vc: '#1A7F37', date: '15/02/2025' },
+          { ico: Headphones,  bg: 'rgba(27,79,168,.1)',  title: 'Chamado #4521 resolvido',    sub: 'Lentidão · 2h resolução', v: 'Resolvido',             vc: '#1A7F37', date: '10/02/2025' },
+          { ico: CheckCircle, bg: 'rgba(52,199,89,.1)',  title: 'Fatura Janeiro paga',        sub: 'Via boleto',              v: fmtBRL(user.plan.price), vc: '#1A7F37', date: '15/01/2025' },
+          { ico: Radio,       bg: 'rgba(245,162,0,.1)', title: 'Manutenção preventiva',      sub: 'Firmware atualizado',     v: 'Concluído',             vc: '#B25000', date: '03/01/2025' },
         ].map((a, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: i < 3 ? '0.5px solid var(--p-sep)' : 'none' }}>
-            <div style={{ width: 34, height: 34, borderRadius: 10, background: a.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, flexShrink: 0 }}>{a.ico}</div>
+            <div style={{ width: 34, height: 34, borderRadius: 10, background: a.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{React.createElement(a.ico, { size: 15 })}</div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--p-l1)' }}>{a.title}</div>
               <div style={{ fontSize: 11, color: 'var(--p-l3)', marginTop: 1 }}>{a.sub}</div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '@/hooks/useApp'
+import { CreditCard, Headphones, BarChart3, LogOut } from 'lucide-react'
 
 export default function Perfil() {
   const { user, showToast, doLogout } = useApp()
@@ -53,14 +54,14 @@ export default function Perfil() {
           <div className="portal-card" style={{ padding: 18 }}>
             <div style={{ fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.07em', color: 'var(--p-l4)', marginBottom: 12 }}>Acesso rápido</div>
             {[
-              { ico: '💳', label: 'Ver faturas',    action: () => navigate('/portal/faturas') },
-              { ico: '🎧', label: 'Abrir chamado',  action: () => navigate('/portal/atendimento') },
-              { ico: '📊', label: 'Ver consumo',    action: () => navigate('/portal/consumo') },
-              { ico: '↩',  label: 'Sair da conta',  action: doLogout, danger: true },
+              { ico: CreditCard, label: 'Ver faturas',    action: () => navigate('/portal/faturas') },
+              { ico: Headphones, label: 'Abrir chamado',  action: () => navigate('/portal/atendimento') },
+              { ico: BarChart3,  label: 'Ver consumo',    action: () => navigate('/portal/consumo') },
+              { ico: LogOut,     label: 'Sair da conta',  action: doLogout, danger: true },
             ].map((a) => (
               <button key={a.label} onClick={a.action}
                 className={a.danger ? 'p-quick-action danger' : 'p-quick-action'}>
-                <span>{a.ico}</span>{a.label}
+                <span style={{ display: 'inline-flex', alignItems: 'center' }}>{React.createElement(a.ico, { size: 16 })}</span>{a.label}
               </button>
             ))}
           </div>

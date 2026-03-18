@@ -102,6 +102,7 @@ export default function SiteNav() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
             <button
               onClick={() => navigate('/login')}
+              className="nav-client-btn"
               style={{
                 ...ghostStyle,
                 fontFamily: 'var(--font)', fontSize: 13, fontWeight: 700,
@@ -139,7 +140,7 @@ export default function SiteNav() {
 
         {/* Mobile drawer */}
         {drawerOpen && (
-          <nav style={{
+          <nav className="mobile-drawer-enter" style={{
             display: 'flex', flexDirection: 'column',
             background: light ? 'rgba(255,255,255,.97)' : 'rgba(13,17,26,.97)',
             backdropFilter: 'blur(20px)',

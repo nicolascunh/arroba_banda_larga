@@ -17,6 +17,7 @@ import WAFab from './sections/WAFab'
 export default function SitePage() {
   return (
     <div style={{ background: 'var(--surface)' }}>
+      <a href="#planos" className="skip-to-content">Pular para o conteúdo</a>
       <SiteNav />
       <main>
         <Hero />

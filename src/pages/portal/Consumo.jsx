@@ -1,14 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useApp } from '@/hooks/useApp'
 import { generateConsumo } from '@/data/mockData'
+import { SkeletonCard, Skeleton } from '@/components/shared/Skeleton'
 
 export default function Consumo() {
   const { user } = useApp()
   const [period, setPeriod] = useState(7)
+  const [loading, setLoading] = useState(true)
   const data  = generateConsumo(period)
   const totDl = data.reduce((s, d) => s + d.dl, 0)
   const totUl = data.reduce((s, d) => s + d.ul, 0)
   const maxV  = Math.max(...data.map((d) => d.dl), ...data.map((d) => d.ul))
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 600)
+    return () => clearTimeout(t)
+  }, [])
+
+  if (loading) return (
+    <div className="fade-in">
+      <div className="p-page-header">
+        <div>
+          <div className="p-page-title">Consumo</div>
+          <div className="p-page-sub">Consumo de dados em tempo real</div>
+        </div>
+      </div>
+      <div className="g3" style={{ marginBottom: 16 }}>
+        {[1,2,3].map(i => <SkeletonCard key={i} rows={2} />)}
+      </div>
+      <Skeleton height={250} radius={22} />
+    </div>
+  )
 
   return (
     <div className="fade-in">

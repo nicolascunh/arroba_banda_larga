@@ -1,15 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useApp } from '@/hooks/useApp'
 import { getMockFaturas, fmtBRL } from '@/data/mockData'
 import StatusBadge from '@/components/portal/StatusBadge'
 import PixModal from '@/components/shared/PixModal'
+import { SkeletonTable } from '@/components/shared/Skeleton'
+import { CreditCard, Download } from 'lucide-react'
 
 const COL = '1fr 120px 120px 120px 150px'
 
 export default function Faturas() {
   const { user, showToast } = useApp()
   const [pixOpen, setPix] = useState(false)
+  const [loading, setLoading] = useState(true)
   const faturas = getMockFaturas(user.plan.price)
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 600)
+    return () => clearTimeout(t)
+  }, [])
+
+  if (loading) return (
+    <div className="fade-in">
+      <div className="p-page-header">
+        <div>
+          <div className="p-page-title">Faturas</div>
+          <div className="p-page-sub">Histórico de pagamentos e faturas em aberto</div>
+        </div>
+      </div>
+      <SkeletonTable cols={5} rows={5} />
+    </div>
+  )
 
   return (
     <div className="fade-in">
@@ -19,7 +39,7 @@ export default function Faturas() {
           <div className="p-page-sub">Histórico de pagamentos e faturas em aberto</div>
         </div>
         <button className="btn-primary" onClick={() => setPix(true)}>
-          💳 Pagar fatura em aberto
+          <CreditCard size={15} /> Pagar fatura em aberto
         </button>
       </div>
 
@@ -41,9 +61,9 @@ export default function Faturas() {
                   Pagar
                 </button>
               ) : (
-                <button style={{ fontFamily: 'var(--font)', fontSize: 11, fontWeight: 700, background: 'var(--bg)', color: 'var(--blue)', border: '1px solid var(--sep)', borderRadius: 7, padding: '6px 12px', cursor: 'pointer' }}
+                <button style={{ fontFamily: 'var(--font)', fontSize: 11, fontWeight: 700, background: 'var(--bg)', color: 'var(--blue)', border: '1px solid var(--sep)', borderRadius: 7, padding: '6px 12px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 4 }}
                   onClick={() => showToast('Download iniciado!')}>
-                  ⬇ PDF
+                  <Download size={12} /> PDF
                 </button>
               )}
             </div>

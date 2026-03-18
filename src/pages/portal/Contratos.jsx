@@ -51,7 +51,7 @@ export default function Contratos() {
           <span className="badge badge-ok">Sem pendências</span>
         </div>
         <p style={{ fontSize: 13.5, color: 'var(--p-l3)', lineHeight: 1.7 }}>
-          Olá, você não tem pendências em seus <strong style={{ color: 'var(--p-l1)' }}>TERMOS</strong>. Todos os termos de uso foram aceitos e estão em conformidade. 😁
+          Olá, você não tem pendências em seus <strong style={{ color: 'var(--p-l1)' }}>TERMOS</strong>. Todos os termos de uso foram aceitos e estão em conformidade.
         </p>
         <button className="btn-secondary" style={{ marginTop: 14, fontSize: 12 }}>
           Ver termos completos →

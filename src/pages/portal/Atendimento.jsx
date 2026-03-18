@@ -2,30 +2,45 @@ import React, { useState } from 'react'
 import { useApp } from '@/hooks/useApp'
 import { MOCK_TICKETS } from '@/data/mockData'
 import StatusBadge from '@/components/portal/StatusBadge'
+import { Send, Clock, User, Headphones, Phone, MessageCircle } from 'lucide-react'
 
 function NewTicketModal({ onClose, onSubmit }) {
   const [form, setForm] = useState({ cat: '', title: '', desc: '', sched: '' })
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+  const [errors, setErrors] = useState({})
+  const set = (k) => (e) => { setForm((f) => ({ ...f, [k]: e.target.value })); setErrors(er => ({...er, [k]: ''})) }
+
+  const handleSubmit = () => {
+    const errs = {}
+    if (!form.cat) errs.cat = 'Selecione uma categoria'
+    if (!form.title.trim()) errs.title = 'Informe o título'
+    if (Object.keys(errs).length) {
+      setErrors(errs)
+      return
+    }
+    onSubmit()
+  }
 
   return (
     <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="modal-box" style={{ maxWidth: 460 }}>
+      <div className="modal-box" style={{ maxWidth: 460 }} role="dialog" aria-modal="true" aria-label="Novo chamado">
         <button className="modal-close" onClick={onClose}>✕</button>
         <div style={{ fontFamily: 'var(--font-d)', fontSize: 20, fontWeight: 800, color: 'var(--l1)', marginBottom: 5 }}>Novo Chamado</div>
         <div style={{ fontSize: 13, color: 'var(--l3)', marginBottom: 22 }}>Responderemos em até 2 horas</div>
 
         <div className="form-field">
           <label className="form-label">Categoria *</label>
-          <select className="form-input" value={form.cat} onChange={set('cat')}>
+          <select className={`form-input${errors.cat ? ' error' : ''}`} value={form.cat} onChange={set('cat')}>
             <option value="">Selecione</option>
             {['Sem conexão', 'Velocidade abaixo do contratado', 'Instabilidade / quedas', 'Wi-Fi / Roteador', 'Fatura / Financeiro', 'Outro'].map((o) => (
               <option key={o}>{o}</option>
             ))}
           </select>
+          {errors.cat && <div className="form-error">{errors.cat}</div>}
         </div>
         <div className="form-field">
           <label className="form-label">Título *</label>
-          <input className="form-input" type="text" placeholder="Descreva brevemente o problema" value={form.title} onChange={set('title')} />
+          <input className={`form-input${errors.title ? ' error' : ''}`} type="text" placeholder="Descreva brevemente o problema" value={form.title} onChange={set('title')} />
+          {errors.title && <div className="form-error">{errors.title}</div>}
         </div>
         <div className="form-field">
           <label className="form-label">Descrição</label>
@@ -40,8 +55,8 @@ function NewTicketModal({ onClose, onSubmit }) {
             <option>Noite (18h–22h)</option>
           </select>
         </div>
-        <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', fontSize: 15 }} onClick={onSubmit}>
-          📨 Abrir chamado
+        <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', fontSize: 15 }} onClick={handleSubmit}>
+          <Send size={15} /> Abrir chamado
         </button>
       </div>
     </div>
@@ -73,10 +88,11 @@ export default function Atendimento() {
         {[
           { dot: 'var(--orange)', label: '1 chamado aberto' },
           { dot: '#34C759',       label: '2 chamados resolvidos' },
-          { label: '⏱ Tempo médio: ', highlight: '1h 42min' },
+          { icon: Clock,          label: 'Tempo médio: ', highlight: '1h 42min' },
         ].map((s, i) => (
           <div key={i} className="portal-card" style={{ padding: '11px 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
             {s.dot && <div style={{ width: 7, height: 7, borderRadius: '50%', background: s.dot }} />}
+            {s.icon && React.createElement(s.icon, { size: 13 })}
             <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--p-l1)' }}>
               {s.label}
               {s.highlight && <span style={{ color: '#1A7F37', fontWeight: 700 }}>{s.highlight}</span>}
@@ -118,8 +134,8 @@ export default function Atendimento() {
             <div style={{ marginTop: 16, borderTop: '0.5px solid var(--p-sep)', paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
               {t.messages.map((m, i) => (
                 <div key={i} style={{ display: 'flex', gap: 10, flexDirection: m.from === 'cliente' ? 'row-reverse' : 'row', alignItems: 'flex-end' }}>
-                  <div style={{ width: 28, height: 28, borderRadius: '50%', background: m.from === 'cliente' ? 'var(--blue)' : 'var(--bg)', border: m.from !== 'cliente' ? '0.5px solid var(--sep)' : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, flexShrink: 0 }}>
-                    {m.from === 'cliente' ? '👤' : '🎧'}
+                  <div style={{ width: 28, height: 28, borderRadius: '50%', background: m.from === 'cliente' ? 'var(--blue)' : 'var(--bg)', border: m.from !== 'cliente' ? '0.5px solid var(--sep)' : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    {React.createElement(m.from === 'cliente' ? User : Headphones, { size: 12 })}
                   </div>
                   <div style={{ maxWidth: '72%', background: m.from === 'cliente' ? 'var(--blue)' : 'var(--bg)', border: m.from !== 'cliente' ? '0.5px solid var(--sep)' : 'none', borderRadius: m.from === 'cliente' ? '14px 14px 4px 14px' : '14px 14px 14px 4px', padding: '10px 14px' }}>
                     <div style={{ fontSize: 13, color: m.from === 'cliente' ? '#fff' : 'var(--p-l1)', lineHeight: 1.5 }}>{m.text}</div>
@@ -135,13 +151,13 @@ export default function Atendimento() {
       {/* Quick contact */}
       <div className="portal-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: 10 }}>
         {[
-          { ico: '📞', label: '0800 020 2440', sub: 'Gratuito', href: 'tel:08000202440' },
-          { ico: '💬', label: 'WhatsApp', sub: 'Seg–Dom 08h–00h', href: 'https://api.whatsapp.com/send/?phone=5508000202440' },
+          { ico: Phone,         label: '0800 020 2440', sub: 'Gratuito', href: 'tel:08000202440' },
+          { ico: MessageCircle, label: 'WhatsApp', sub: 'Seg–Dom 08h–00h', href: 'https://api.whatsapp.com/send/?phone=5508000202440' },
         ].map((ch) => (
           <a key={ch.label} href={ch.href} target={ch.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer"
             className="hover-blue-lt"
             style={{ display: 'flex', alignItems: 'center', gap: 10, padding: 12, borderRadius: 10, textDecoration: 'none' }}>
-            <span style={{ fontSize: 20 }}>{ch.ico}</span>
+            <span style={{ display: 'flex', alignItems: 'center' }}>{React.createElement(ch.ico, { size: 20 })}</span>
             <div>
               <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--p-l1)' }}>{ch.label}</div>
               <div style={{ fontSize: 11, color: 'var(--p-l3)' }}>{ch.sub}</div>

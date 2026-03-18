@@ -1,4 +1,5 @@
 import React from 'react'
+import { AlertTriangle } from 'lucide-react'
 
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -53,10 +54,9 @@ export default class ErrorBoundary extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 20px',
-                fontSize: 28,
               }}
             >
-              ⚠
+              <AlertTriangle size={28} color="#FF3B30" />
             </div>
 
             {/* Heading */}
