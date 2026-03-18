@@ -18,7 +18,7 @@ export default function SiteFooter() {
   return (
     <footer style={{ background: '#1C1C1E', padding: '56px 24px 36px' }}>
       <div className="site-container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr repeat(3,1fr)', gap: 44, paddingBottom: 40, borderBottom: '0.5px solid rgba(255,255,255,.08)', marginBottom: 32 }}>
+        <div className="footer-grid">
           <div>
             <Logo height={40} />
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,.38)', lineHeight: 1.72, marginTop: 16, maxWidth: 260 }}>Internet 100% fibra óptica pra conectar a geração @. 16 anos em Campos dos Goytacazes.</p>

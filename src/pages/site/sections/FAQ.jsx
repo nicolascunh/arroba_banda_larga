@@ -19,7 +19,7 @@ export default function FAQ() {
           <div className="site-kicker center">Dúvidas frequentes</div>
           <h2 className="site-h2 center">Perguntas e Respostas</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, maxWidth: 900, margin: '0 auto' }}>
+        <div className="faq-grid">
           {ITEMS.map((it, i) => (
             <div key={i} className={`faq-item${open === i ? ' open' : ''}`}>
               <button onClick={() => setOpen(open === i ? null : i)}

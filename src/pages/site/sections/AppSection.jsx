@@ -16,7 +16,7 @@ export default function AppSection() {
   return (
     <section className="site-section" id="app" style={{ background: 'var(--dark)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 70% 60% at 30% 50%,rgba(27,79,168,.15),transparent)', pointerEvents: 'none' }} />
-      <div className="site-container" style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center', gap: 64, position: 'relative', zIndex: 1 }}>
+      <div className="site-container app-grid">
         <div>
           <div className="site-kicker amber">App Arroba</div>
           <h2 style={{ fontFamily: 'var(--font-d)', fontSize: 'clamp(26px,3.5vw,42px)', fontWeight: 800, color: '#fff', letterSpacing: '-.025em', lineHeight: 1.2, marginBottom: 14 }}>Tudo na palma<br />da sua mão</h2>
@@ -39,7 +39,7 @@ export default function AppSection() {
           </div>
         </div>
         {/* Phone mockups */}
-        <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', flexShrink: 0 }} aria-hidden="true">
+        <div className="app-phones" aria-hidden="true">
           {[{ mt: 30 }, { mt: 0 }].map((ph, pi) => (
             <div key={pi} style={{ width: 130, background: 'var(--dark3)', borderRadius: 26, padding: 3, border: '1px solid rgba(255,255,255,.12)', boxShadow: '0 20px 60px rgba(0,0,0,.4)', marginTop: ph.mt }}>
               <div style={{ background: 'var(--dark)', borderRadius: 24, overflow: 'hidden' }}>

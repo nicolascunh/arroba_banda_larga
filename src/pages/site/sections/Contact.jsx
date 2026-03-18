@@ -31,7 +31,7 @@ export default function Contact() {
           <h2 className="site-h2">Pronto para ter internet<br />de verdade?</h2>
           <p className="site-sub">Nossa equipe atende de segunda a segunda. Ligue, mande WhatsApp ou preencha o formulário.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 52, alignItems: 'start' }}>
+        <div className="contact-grid">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {CHANNELS.map((ch) => (
               <a key={ch.label} href={ch.href || undefined} target={ch.href?.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="contact-channel">
@@ -48,7 +48,7 @@ export default function Contact() {
             {!sent ? (
               <>
                 <div style={{ fontFamily: 'var(--font-d)', fontSize: 19, fontWeight: 800, color: 'var(--l1)', letterSpacing: '-.02em', marginBottom: 24 }}>Solicitar contratação gratuita</div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                <div className="contact-form-grid">
                   {[{ lbl: 'Nome completo *', k: 'name', type: 'text', ph: 'Seu nome', full: false }, { lbl: 'Telefone *', k: 'tel', type: 'tel', ph: '(22) 99999-9999', full: false }, { lbl: 'E-mail', k: 'email', type: 'email', ph: 'seu@email.com', full: true }, { lbl: 'CEP *', k: 'cep', type: 'text', ph: '00000-000', full: false }].map((f) => (
                     <div key={f.k} className="form-field" style={{ gridColumn: f.full ? 'span 2' : 'span 1', marginBottom: 0 }}>
                       <label className="form-label">{f.lbl}</label>

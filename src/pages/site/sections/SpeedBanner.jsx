@@ -25,7 +25,7 @@ export default function SpeedBanner() {
   return (
     <section style={{ background: 'linear-gradient(135deg,var(--blue-dkr),var(--blue) 55%,#1E63D6)', padding: '80px 24px', position: 'relative', overflow: 'hidden' }} aria-label="Teste de velocidade">
       <div aria-hidden="true" style={{ position: 'absolute', right: '-4%', top: '50%', transform: 'translateY(-50%)', fontFamily: 'var(--font-d)', fontSize: 500, fontWeight: 800, color: 'rgba(255,255,255,.018)', lineHeight: 1, pointerEvents: 'none' }}>@</div>
-      <div className="site-container" style={{ display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center', gap: 64, position: 'relative', zIndex: 1 }}>
+      <div className="site-container speed-grid">
         <div>
           <div className="site-kicker amber">Teste de velocidade</div>
           <h2 style={{ fontFamily: 'var(--font-d)', fontSize: 'clamp(26px,3.5vw,42px)', fontWeight: 800, color: '#fff', letterSpacing: '-.025em', lineHeight: 1.2, marginBottom: 14 }}>
@@ -38,8 +38,8 @@ export default function SpeedBanner() {
             ⚡ {running ? 'Medindo...' : 'Iniciar teste simulado'}
           </button>
         </div>
-        <div style={{ width: 210, height: 210, position: 'relative', flexShrink: 0, cursor: 'pointer' }} onClick={run} role="button" aria-label="Iniciar teste de velocidade" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && run()}>
-          <svg width="210" height="210" viewBox="0 0 210 210" aria-hidden="true">
+        <div className="speed-gauge-wrap" onClick={run} role="button" aria-label="Iniciar teste de velocidade" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && run()}>
+          <svg width="100%" height="100%" viewBox="0 0 210 210" aria-hidden="true">
             <circle cx="105" cy="105" r={r} fill="none" stroke="rgba(255,255,255,.08)" strokeWidth="12" strokeDasharray={`${arc} ${circ - arc}`} strokeLinecap="round" transform="rotate(-218 105 105)" />
             <circle cx="105" cy="105" r={r} fill="none" stroke="var(--amber)" strokeWidth="12" strokeLinecap="round" strokeDasharray={`${arc - offset} ${circ - (arc - offset)}`} transform="rotate(-218 105 105)" style={{ transition: 'stroke-dasharray .1s' }} />
           </svg>

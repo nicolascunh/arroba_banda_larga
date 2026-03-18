@@ -14,7 +14,7 @@ export default function Hero() {
       <div style={{ position: 'absolute', width: 450, height: 450, borderRadius: '50%', background: 'rgba(245,162,0,.07)', bottom: -180, left: -100, filter: 'blur(90px)', pointerEvents: 'none' }} />
       <div aria-hidden="true" style={{ position: 'absolute', right: '-4%', top: '50%', transform: 'translateY(-50%)', fontFamily: 'var(--font-d)', fontSize: 560, fontWeight: 800, color: 'rgba(255,255,255,.017)', lineHeight: 1, pointerEvents: 'none', userSelect: 'none' }}>@</div>
 
-      <div className="site-container" style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center', flex: 1, padding: '80px 24px 60px' }}>
+      <div className="site-container hero-grid">
         <div>
           <div className="fade-up-1" style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(245,162,0,.12)', border: '1px solid rgba(245,162,0,.25)', color: 'var(--amber)', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.07em', padding: '5px 14px', borderRadius: 20, marginBottom: 28 }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--amber)', animation: 'blink 2s ease infinite' }} />
@@ -45,7 +45,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, animation: 'fadeUp .7s .2s ease both' }}>
+        <div className="hero-plans-col" style={{ animation: 'fadeUp .7s .2s ease both' }}>
           {PLANS_PREVIEW.map((p, i) => (
             <a href="#planos" key={i} className="hero-plan-card" style={{
               background: p.top ? 'linear-gradient(135deg,rgba(27,79,168,.25),rgba(27,79,168,.12))' : 'rgba(255,255,255,.05)',

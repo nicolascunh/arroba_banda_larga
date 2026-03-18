@@ -298,4 +298,5 @@ select.form-input:focus { background-color: #fff; }
 }
 @media (max-width: 640px) {
   .g2, .g3, .g4 { grid-template-columns: 1fr; }
+  .modal-box { padding: 24px 20px; }
 }

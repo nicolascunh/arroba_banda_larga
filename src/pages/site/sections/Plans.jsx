@@ -17,7 +17,7 @@ export default function Plans() {
           <h2 className="site-h2">As melhores opções<br />de planos para você!</h2>
           <p className="site-sub">Todos incluem instalação imediata, Wi-Fi Premium e velocidade simétrica — download = upload.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+        <div className="plans-grid">
           {PLANS.map((p) => (
             <div key={p.speed} className={`plan-card${p.feat ? ' featured' : ''}`}>
               {p.feat && <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--amber)', color: '#fff', fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '.07em', padding: '4px 16px', borderRadius: 20, whiteSpace: 'nowrap', boxShadow: '0 3px 12px rgba(245,162,0,.45)' }}>✦ Mais popular</div>}

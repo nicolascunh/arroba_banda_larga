@@ -472,6 +472,10 @@
   /* Padding menor */
   .p-content { padding: 20px 16px; }
   .p-topbar  { padding: 0 16px; }
+
+  /* Table horizontal scroll */
+  .p-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .p-table-head, .p-table-row { min-width: 560px; }
 }
 
 @media (max-width: 640px) {

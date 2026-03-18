@@ -374,11 +374,174 @@
   box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
 }
 
+/* ─── Section grid layouts ───────────────────── */
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  flex: 1;
+  padding: 80px 24px 60px;
+}
+
+.hero-plans-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.speed-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.speed-gauge-wrap {
+  width: 210px;
+  height: 210px;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.coverage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.promo-emoji {
+  font-size: 110px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.app-phones {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 52px;
+  align-items: start;
+}
+
+.contact-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 44px;
+  padding-bottom: 40px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, .08);
+  margin-bottom: 32px;
+}
+
 /* ─── Responsive site ────────────────────────── */
 @media (max-width: 960px) {
   .site-nav-links { display: none; }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 16px 40px;
+  }
+  .hero-plans-col { display: none; }
+
+  .plans-grid { grid-template-columns: 1fr 1fr; }
+
+  .speed-grid { grid-template-columns: 1fr; gap: 40px; justify-items: center; }
+  .speed-gauge-wrap { width: 180px; height: 180px; }
+
+  .coverage-grid { grid-template-columns: 1fr; gap: 40px; }
+  .coverage-grid > :first-child { order: 2; }
+
+  .promo-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; justify-items: center; }
+  .promo-emoji { font-size: 80px; order: -1; }
+
+  .app-grid { grid-template-columns: 1fr; gap: 40px; }
+  .app-phones { justify-content: center; }
+
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  .faq-grid { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .how-it-works-grid { grid-template-columns: 1fr 1fr; gap: 32px 16px; }
+  .how-it-works-line { display: none; }
 }
+
 @media (max-width: 640px) {
   :root { --nav-h: 60px; }
   .site-section { padding: 60px 16px; }
+  .site-container { padding: 0 16px; }
+
+  .hero-grid { padding: 40px 16px 32px; gap: 32px; }
+
+  .plans-grid { grid-template-columns: 1fr; }
+  .plan-card { padding: 24px 20px; }
+
+  .speed-gauge-wrap { width: 160px; height: 160px; }
+
+  .coverage-grid { gap: 32px; }
+
+  .promo-emoji { font-size: 64px; }
+
+  .app-phones { display: none; }
+
+  .contact-form-grid { grid-template-columns: 1fr; }
+  .contact-form-grid .form-field { grid-column: span 1 !important; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+
+  .how-it-works-grid { grid-template-columns: 1fr; }
+
+  .wa-fab { bottom: 20px; right: 20px; width: 52px; height: 52px; }
 }
